@@ -70,11 +70,14 @@ class AddForm extends React.Component{
 		super(props);
 		console.log("constructor.props.itemValue: "+ this.props.itemValue)
 		
+		 this.handleAddSubmit = this.handleAddSubmit.bind(this);
+		
 	}
 	
 	handleAddSubmit(e){
 		e.preventDefault();
-		console.log("inside handleAddSubmit");
+		console.log("inside AddForm.handleAddSubmit. this: "+this);
+		this.props.onAddSubmit();
 		 
 	}
 	
@@ -105,11 +108,15 @@ class TodoApp extends React.Component{
 	
 	}
 	
+	handleAddSubmit(){
+		console.log("inside TodoApp.handleAddSubmit");
+	}
+	
 	render(){
 		return (
 			<div>
 				<h3>TODO</h3>
-				<AddForm  />
+				<AddForm  onAddSubmit={this.handleAddSubmit}/>
 				<TodoItemsTable items={this.items}/>
 			</div>
 		);
