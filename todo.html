@@ -11,8 +11,12 @@
 <script type="text/jsx;harmony=true">
 
 class TodoItem{
+
+	constructor(value){
+		this.value = value;
+	}
 	toString(){
-		return "aTodoItem"
+		return "value: "+this.value
 	}
 };
 
@@ -22,9 +26,10 @@ class TodoItemRow extends React.Component{
 	}
 	
 	render(){
+		console.log("inside TodoItemRow.render: item: "+ this.props.item)
 		return (
 			<tr>
-				<td>03</td>
+				<td>{this.props.item.value}</td>
 			</tr>
 		);
 	}
@@ -34,9 +39,16 @@ class TodoItemRow extends React.Component{
 class TodoItemsTable extends React.Component{
 	constructor(props){
 		super(props);
+		console.log("items[0]: " + this.props.items[0])
 	}
 	
 	render(){
+		var rows = [];
+		
+		this.props.items.forEach(function(item){
+			console.log("item.value: "+ item.value);
+			rows.push(<TodoItemRow item={item}/>);
+		})
 		return (
 			<table>
 				<thead>
@@ -45,8 +57,7 @@ class TodoItemsTable extends React.Component{
 					</tr>
 				</thead>
 				<tbody>
-					<TodoItemRow todoItem=""/>
-					<TodoItemRow/>
+					{rows}
 				</tbody>
 			</table>
 		);
@@ -57,22 +68,35 @@ class TodoItemsTable extends React.Component{
 class AddForm extends React.Component{
 	constructor(props){
 		super(props);
+		console.log("constructor.props.itemValue: "+ this.props.itemValue)
+		
 	}
 	
 	render(){
+		console.log("render.props.itemValue: "+ this.props.itemValue)
 		return (
 			<form>
-				<input type="text" value="hello"/>
+				<input type="text" value={this.props.itemValue}/>
 				<button>Add #</button>
 			</form>
 		);
 	}
 }
 
+AddForm.defaultProps ={itemValue:'defaultTodo'};
+
 
 class TodoApp extends React.Component{
+	
 	constructor(props){
 		super(props);
+		this.name = "John";
+		var item0 = new TodoItem("item0");
+		var item1 = new TodoItem("item1");
+		var item2 = new TodoItem("item2");
+		
+		this.items = [item0, item1, item2];
+	
 	}
 	
 	render(){
@@ -80,7 +104,7 @@ class TodoApp extends React.Component{
 			<div>
 				<h3>TODO</h3>
 				<AddForm  />
-				<TodoItemsTable />
+				<TodoItemsTable items={this.items}/>
 			</div>
 		);
 	}
