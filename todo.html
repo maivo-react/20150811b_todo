@@ -77,7 +77,8 @@ class AddForm extends React.Component{
 	handleAddSubmit(e){
 		e.preventDefault();
 		console.log("inside AddForm.handleAddSubmit. this: "+this);
-		this.props.onAddSubmit();
+		var newTodoItemText = React.findDOMNode(this.refs.newTodoItemInput).value.trim();
+		this.props.onAddSubmit(newTodoItemText);
 		 
 	}
 	
@@ -85,7 +86,7 @@ class AddForm extends React.Component{
 		console.log("render.props.itemValue: "+ this.props.itemValue)
 		return (
 			<form>
-				<input type="text" value={this.props.itemValue}/>
+				<input type="text" ref="newTodoItemInput"/>
 				<button onClick={this.handleAddSubmit}>Add #</button>
 			</form>
 		);
@@ -105,11 +106,17 @@ class TodoApp extends React.Component{
 		var item2 = new TodoItem("item2");
 		
 		this.items = [item0, item1, item2];
+		
+		this.handleAddSubmit = this.handleAddSubmit.bind(this);
 	
 	}
 	
-	handleAddSubmit(){
-		console.log("inside TodoApp.handleAddSubmit");
+	handleAddSubmit(newTodoItemText){
+		console.log("inside TodoApp.handleAddSubmit. newTodoItemText: "+newTodoItemText);
+		
+		var newTodoItem = new TodoItem(newTodoItemText);
+		this.items.push(newTodoItem)
+		//console.log("this.items[0].value: "+this.items[0].value)
 	}
 	
 	render(){
