@@ -8,7 +8,13 @@
 </head>
 <body>
 
-<script type="text/jsx">
+<script type="text/jsx;harmony=true">
+
+class TodoItem{
+	toString(){
+		return "aTodoItem"
+	}
+};
 
 var TodoItemRow = React.createClass({
   render: function() {
@@ -29,7 +35,7 @@ var TodoItemsTable = React.createClass({
 				</tr>
 			</thead>
 			<tbody>
-				<TodoItemRow/>
+				<TodoItemRow todoItem=""/>
 				<TodoItemRow/>
 			</tbody>
 		</table>
@@ -53,6 +59,8 @@ var AddForm = React.createClass({
 var TodoApp = React.createClass({
  
   render: function() {
+	var aTodoItem = new TodoItem();
+	console.log("aTodoItem.toString(): "+ aTodoItem.toString());
     return (
       <div>
         <h3>TODO</h3>
