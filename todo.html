@@ -16,62 +16,75 @@ class TodoItem{
 	}
 };
 
-var TodoItemRow = React.createClass({
-  render: function() {
-    return( 
-		<tr>
-			<td>03</td>
-		</tr>
-	);
-  }
-});
-var TodoItemsTable = React.createClass({
-  render: function() {
-    return( 
-		<table>
-			<thead>
-				<tr>
-					<th>Value</th>
-				</tr>
-			</thead>
-			<tbody>
-				<TodoItemRow todoItem=""/>
-				<TodoItemRow/>
-			</tbody>
-		</table>
-	);
-  }
-});
-
-var AddForm = React.createClass({
-  render: function() {
-   
-    return( 
-		<form>
-          <input type="text" value="hello"/>
-          <button>Add #</button>
-        </form>
-	);
-  }
-});
+class TodoItemRow extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	
+	render(){
+		return (
+			<tr>
+				<td>03</td>
+			</tr>
+		);
+	}
+}
 
 
-var TodoApp = React.createClass({
- 
-  render: function() {
-	var aTodoItem = new TodoItem();
-	console.log("aTodoItem.toString(): "+ aTodoItem.toString());
-    return (
-      <div>
-        <h3>TODO</h3>
-		<AddForm  />
-        <TodoItemsTable />
-		
-       
-      </div>
-    );
-  }
-});
+class TodoItemsTable extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	
+	render(){
+		return (
+			<table>
+				<thead>
+					<tr>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<TodoItemRow todoItem=""/>
+					<TodoItemRow/>
+				</tbody>
+			</table>
+		);
+	}
+}
+
+
+class AddForm extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	
+	render(){
+		return (
+			<form>
+				<input type="text" value="hello"/>
+				<button>Add #</button>
+			</form>
+		);
+	}
+}
+
+
+class TodoApp extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	
+	render(){
+		return (
+			<div>
+				<h3>TODO</h3>
+				<AddForm  />
+				<TodoItemsTable />
+			</div>
+		);
+	}
+}
 
 React.render(<TodoApp />, document.body);
 </script>
