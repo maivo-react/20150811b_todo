@@ -72,12 +72,18 @@ class AddForm extends React.Component{
 		
 	}
 	
+	handleAddSubmit(e){
+		e.preventDefault();
+		console.log("inside handleAddSubmit");
+		 
+	}
+	
 	render(){
 		console.log("render.props.itemValue: "+ this.props.itemValue)
 		return (
 			<form>
 				<input type="text" value={this.props.itemValue}/>
-				<button>Add #</button>
+				<button onClick={this.handleAddSubmit}>Add #</button>
 			</form>
 		);
 	}
