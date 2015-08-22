@@ -122,7 +122,9 @@ class TodoApp extends React.Component{
 		//returns new array that results from joining 2 or more arrays
 		var newItems = items.concat([newTodoItem]);
 		
-		this.setState({items: newItems});
+		//this.setState({items: newItems});
+		
+		this.state.items = newItems;
 	}
 	
 	render(){
