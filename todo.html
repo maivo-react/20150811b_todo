@@ -105,7 +105,9 @@ class TodoApp extends React.Component{
 		var item1 = new TodoItem("item1");
 		var item2 = new TodoItem("item2");
 		
-		this.items = [item0, item1, item2];
+		//initialize state
+		this.state = {};
+		this.state.items = [item0, item1, item2];
 		
 		this.handleAddSubmit = this.handleAddSubmit.bind(this);
 	
@@ -115,8 +117,12 @@ class TodoApp extends React.Component{
 		console.log("inside TodoApp.handleAddSubmit. newTodoItemText: "+newTodoItemText);
 		
 		var newTodoItem = new TodoItem(newTodoItemText);
-		this.items.push(newTodoItem)
-		//console.log("this.items[0].value: "+this.items[0].value)
+		var items = this.state.items;
+		
+		//returns new array that results from joining 2 or more arrays
+		var newItems = items.concat([newTodoItem]);
+		
+		this.setState({items: newItems});
 	}
 	
 	render(){
@@ -124,7 +130,7 @@ class TodoApp extends React.Component{
 			<div>
 				<h3>TODO</h3>
 				<AddForm  onAddSubmit={this.handleAddSubmit}/>
-				<TodoItemsTable items={this.items}/>
+				<TodoItemsTable items={this.state.items}/>
 			</div>
 		);
 	}
